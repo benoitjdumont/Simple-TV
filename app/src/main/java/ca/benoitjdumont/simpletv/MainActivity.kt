@@ -5,6 +5,13 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.ResolveInfo
 import android.os.Bundle
+import android.net.Uri
+import org.json.JSONObject
+import java.net.HttpURLConnection
+import java.net.URL
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import android.provider.Settings
 import android.widget.ImageView
 import androidx.activity.ComponentActivity
@@ -59,6 +66,9 @@ private fun SimpleTvHome() {
     var language by remember { mutableStateOf(prefs.getString("language", "fr") ?: "fr") }
     var favoritesOnly by remember { mutableStateOf(false) }
     var apps by remember { mutableStateOf(emptyList<TvApp>()) }
+    var updateMessage by remember { mutableStateOf("Vérifier les mises à jour") }
+    var releaseUrl by remember { mutableStateOf<String?>(null) }
+    val scope = rememberCoroutineScope()
     val favorites = remember {
         mutableStateListOf<String>().apply {
             addAll(prefs.getStringSet("favorites", emptySet()) ?: emptySet())
@@ -86,9 +96,9 @@ private fun SimpleTvHome() {
     LaunchedEffect(Unit) { loadApps() }
     val visibleApps = apps.filter { !favoritesOnly || favorites.contains(it.id) }
     val labels = when (language) {
-        "en" -> listOf("Your apps", "Favorites", "All apps", "Settings", "No apps found", "No favorites yet — select ☆ on an app", "Choose the apps shown on your home screen")
-        "es" -> listOf("Tus aplicaciones", "Favoritos", "Todas", "Ajustes", "No se encontraron aplicaciones", "Aún no hay favoritos — selecciona ☆", "Elige las aplicaciones de tu pantalla de inicio")
-        else -> listOf("Vos applications", "Favoris", "Toutes", "Paramètres", "Aucune application trouvée", "Aucun favori — sélectionnez ☆ sur une application", "Choisissez les applications affichées sur votre écran d’accueil")
+        "en" -> listOf("Your apps", "Favorites", "All apps", "Settings", "No apps found", "No favorites yet — select ☆ on an app", "Choose the apps shown on your home screen", "Check for updates")
+        "es" -> listOf("Tus aplicaciones", "Favoritos", "Todas", "Ajustes", "No se encontraron aplicaciones", "Aún no hay favoritos — selecciona ☆", "Elige las aplicaciones de tu pantalla de inicio", "Buscar actualizaciones")
+        else -> listOf("Vos applications", "Favoris", "Toutes", "Paramètres", "Aucune application trouvée", "Aucun favori — sélectionnez ☆ sur une application", "Choisissez les applications affichées sur votre écran d’accueil", "Vérifier les mises à jour")
     }
 
     Surface(Modifier.fillMaxSize(), color = Navy) {
@@ -103,7 +113,19 @@ private fun SimpleTvHome() {
                     prefs.edit().putString("language", language).apply()
                 }
                 Spacer(Modifier.width(12.dp))
-                FocusCard("⚙", labels[3], Modifier.width(150.dp).height(68.dp)) {
+                FocusCard("↻", labels[7], Modifier.width(156.dp).height(68.dp)) {
+                    scope.launch {
+                        updateMessage = if (language == "en") "Checking GitHub…" else if (language == "es") "Consultando GitHub…" else "Vérification de GitHub…"
+                        val result = withContext(Dispatchers.IO) { checkLatestRelease(context.packageName, context.packageManager.getPackageInfo(context.packageName, 0).versionName ?: "1.0.0") }
+                        updateMessage = result.first
+                        releaseUrl = result.second
+                        if (result.second != null) {
+                            try { context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(result.second))) } catch (_: Exception) { }
+                        }
+                    }
+                }
+                Spacer(Modifier.width(10.dp))
+                FocusCard("⚙", labels[3], Modifier.width(110.dp).height(68.dp)) {
                     context.startActivity(Intent(Settings.ACTION_SETTINGS))
                 }
             }
@@ -140,6 +162,7 @@ private fun SimpleTvHome() {
                     }
                 }
             }
+            Text(updateMessage, color = PaleBlue.copy(alpha = 0.78f), fontSize = 13.sp)
             Text(labels[6], color = PaleBlue.copy(alpha = 0.72f), fontSize = 14.sp)
         }
     }
@@ -172,5 +195,36 @@ private fun FocusCard(title: String, subtitle: String, modifier: Modifier = Modi
         verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
         Text(title, color = Color.White, fontSize = 17.sp, fontWeight = FontWeight.Bold, maxLines = 1)
         Text(subtitle, color = PaleBlue, fontSize = 11.sp, maxLines = 1)
+    }
+}
+private suspend fun checkLatestRelease(packageName: String, installedVersion: String): Pair<String, String?> = withContext(Dispatchers.IO) {
+    try {
+        val connection = (URL("https://api.github.com/repos/benoitjdumont/Simple-TV/releases/latest").openConnection() as HttpURLConnection).apply {
+            requestMethod = "GET"
+            connectTimeout = 8000
+            readTimeout = 8000
+            setRequestProperty("Accept", "application/vnd.github+json")
+            setRequestProperty("User-Agent", "Simple-TV-Android")
+        }
+        val code = connection.responseCode
+        if (code == 404) return@withContext "Aucune version publiée pour le moment." to null
+        if (code !in 200..299) return@withContext "GitHub indisponible (HTTP $code)." to null
+        val json = JSONObject(connection.inputStream.bufferedReader().use { it.readText() })
+        val tag = json.optString("tag_name").removePrefix("v")
+        val url = json.optString("html_url")
+        val latestParts = tag.split(".").mapNotNull { it.toIntOrNull() }
+        val installedParts = installedVersion.removePrefix("v").split(".").mapNotNull { it.toIntOrNull() }
+        fun compare(a: List<Int>, b: List<Int>): Int {
+            for (i in 0 until maxOf(a.size, b.size)) {
+                val diff = (a.getOrElse(i) { 0 }).compareTo(b.getOrElse(i) { 0 })
+                if (diff != 0) return diff
+            }
+            return 0
+        }
+        if (tag.isBlank() || url.isBlank()) return@withContext "Réponse GitHub invalide." to null
+        if (compare(latestParts, installedParts) > 0) "Nouvelle version $tag disponible. Ouvrir la page GitHub pour installer." to url
+        else "Simple TV est à jour (version $installedVersion)." to null
+    } catch (_: Exception) {
+        "Impossible de vérifier les mises à jour. Réessayez plus tard." to null
     }
 }
