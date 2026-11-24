@@ -9,7 +9,7 @@ import androidx.activity.ComponentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-/** Create, rename, delete folders, and choose their apps. */
+/** Create, rename, delete folders, choose their apps, and open them. */
 class FoldersActivity : ComponentActivity() {
 
     private lateinit var list: RecyclerView
@@ -33,6 +33,7 @@ class FoldersActivity : ComponentActivity() {
         list.adapter = FolderRowAdapter(
             folders,
             nameOf = { Folders.displayName(this, it) },
+            onOpen = { startActivity(Intent(this, FolderActivity::class.java).putExtra(FolderActivity.EXTRA_ID, it.id)) },
             onRename = { askName(it) },
             onPick = { openPicker(it) },
             onDelete = { confirmDelete(it) }

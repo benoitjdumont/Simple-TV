@@ -14,17 +14,14 @@ class SettingsActivity : ComponentActivity() {
     private var imageUri: String? = null
     private var folderUri: String? = null
     private var interval = 60
-    private var icons = false
 
     private lateinit var btnMode: Button
     private lateinit var btnInterval: Button
-    private lateinit var btnIcons: Button
     private lateinit var status: TextView
     private lateinit var lat: EditText
     private lateinit var lon: EditText
 
-    // Picking an image or folder also selects the matching background mode,
-    // so the choice shows up without a second step.
+    // Picking an image or folder also selects the matching background mode.
     private val pickImage = registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
         if (uri != null) {
             runCatching { contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION) }
@@ -54,11 +51,9 @@ class SettingsActivity : ComponentActivity() {
         imageUri = prefs.getString(Prefs.KEY_IMAGE_URI, null)
         folderUri = prefs.getString(Prefs.KEY_FOLDER_URI, null)
         interval = prefs.getInt(Prefs.KEY_INTERVAL, 60)
-        icons = Prefs.showIcons(this)
 
         btnMode = findViewById(R.id.btn_mode)
         btnInterval = findViewById(R.id.btn_interval)
-        btnIcons = findViewById(R.id.btn_icons)
         status = findViewById(R.id.text_status)
         lat = findViewById(R.id.edit_lat)
         lon = findViewById(R.id.edit_lon)
@@ -89,10 +84,6 @@ class SettingsActivity : ComponentActivity() {
             }
             updateLabels()
         }
-        btnIcons.setOnClickListener {
-            icons = !icons
-            updateLabels()
-        }
         findViewById<Button>(R.id.btn_save).setOnClickListener { save() }
 
         updateLabels()
@@ -106,10 +97,6 @@ class SettingsActivity : ComponentActivity() {
         }
         btnMode.text = getString(R.string.settings_mode, modeName)
         btnInterval.text = getString(R.string.settings_interval, interval)
-        btnIcons.text = getString(
-            R.string.settings_icons,
-            getString(if (icons) R.string.icons_on else R.string.icons_off)
-        )
     }
 
     private fun save() {
@@ -133,7 +120,6 @@ class SettingsActivity : ComponentActivity() {
             .putString(Prefs.KEY_IMAGE_URI, imageUri)
             .putString(Prefs.KEY_FOLDER_URI, folderUri)
             .putInt(Prefs.KEY_INTERVAL, interval)
-            .putBoolean(Prefs.KEY_ICONS, icons)
             .putString(Prefs.KEY_LAT, lat.text.toString().trim())
             .putString(Prefs.KEY_LON, lon.text.toString().trim())
             .apply()

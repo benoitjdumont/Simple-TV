@@ -6,7 +6,7 @@ import androidx.activity.ComponentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-/** Tick the apps that belong to one folder. Each tick saves immediately. */
+/** Tick the apps that belong to one folder (or to favorites). Each tick saves immediately. */
 class AppPickerActivity : ComponentActivity() {
 
     companion object {
@@ -24,7 +24,7 @@ class AppPickerActivity : ComponentActivity() {
             return
         }
 
-        findViewById<TextView>(R.id.title).text = folder.name
+        findViewById<TextView>(R.id.title).text = Folders.displayName(this, folder)
         val list: RecyclerView = findViewById(R.id.list)
         list.layoutManager = LinearLayoutManager(this)
         list.adapter = CheckAdapter(AppsLoader.load(this), folder.apps) { key, checked ->

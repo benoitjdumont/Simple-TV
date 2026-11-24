@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -14,6 +15,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 import kotlin.concurrent.thread
+import kotlin.math.max
 
 class MainActivity : ComponentActivity() {
 
@@ -22,8 +24,8 @@ class MainActivity : ComponentActivity() {
     private lateinit var clock: TextView
     private lateinit var date: TextView
     private lateinit var weather: TextView
-    private lateinit var folderList: RecyclerView
-    private var folders: List<Folder> = emptyList()
+    private lateinit var favList: RecyclerView
+    private lateinit var favEmpty: TextView
 
     private val clockTick = object : Runnable {
         override fun run() {
@@ -47,8 +49,16 @@ class MainActivity : ComponentActivity() {
         clock = findViewById(R.id.clock)
         date = findViewById(R.id.date)
         weather = findViewById(R.id.weather)
-        folderList = findViewById(R.id.folder_list)
-        folderList.layoutManager = GridLayoutManager(this, 4)
+        favList = findViewById(R.id.fav_list)
+        favEmpty = findViewById(R.id.fav_empty)
+
+        // Favorites start at the bottom and grow upward, one row per screenful of width.
+        val density = resources.displayMetrics.density
+        val usableWidth = resources.displayMetrics.widthPixels - (96 * density).toInt()
+        val tileWidth = (168 * density).toInt()
+        val layout = GridLayoutManager(this, max(1, usableWidth / tileWidth))
+        layout.stackFromEnd = true
+        favList.layoutManager = layout
 
         findViewById<Button>(R.id.btn_folders).setOnClickListener {
             startActivity(Intent(this, FoldersActivity::class.java))
@@ -60,12 +70,12 @@ class MainActivity : ComponentActivity() {
 
     override fun onResume() {
         super.onResume()
-        // Reload every time, so folder changes and new apps show up.
-        folders = Folders.load(this)
-        folderList.adapter = TileAdapter(folders.map { Folders.displayName(this, it) }) { position ->
-            val folder = folders[position]
-            startActivity(Intent(this, FolderActivity::class.java).putExtra(FolderActivity.EXTRA_ID, folder.id))
-        }
+        // Reload every time, so favorites and newly installed apps show up.
+        val favoriteKeys = Folders.load(this).first { it.id == Folders.FAVORITES_ID }.apps
+        val favorites = AppsLoader.load(this).filter { it.key in favoriteKeys }
+        favList.adapter = AppAdapter(favorites)
+        favEmpty.visibility = if (favorites.isEmpty()) View.VISIBLE else View.GONE
+
         background.start()
         handler.post(clockTick)
         handler.post(weatherTick)

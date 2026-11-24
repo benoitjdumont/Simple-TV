@@ -11,9 +11,6 @@
     <string name="btn_pick_image">Choisir une image</string>
     <string name="btn_pick_folder">Choisir le dossier du diaporama</string>
     <string name="settings_interval">Délai du diaporama : %1$d s</string>
-    <string name="settings_icons">Icônes : %1$s</string>
-    <string name="icons_on">Activées</string>
-    <string name="icons_off">Désactivées</string>
     <string name="label_latitude">Latitude</string>
     <string name="label_longitude">Longitude</string>
     <string name="btn_save">Enregistrer</string>
@@ -23,6 +20,8 @@
     <string name="need_image">Choisissez une image avant d\'enregistrer.</string>
     <string name="need_folder">Choisissez un dossier avant d\'enregistrer.</string>
     <string name="folder_all">Toutes les applications</string>
+    <string name="folder_favorites">Favoris</string>
+    <string name="favorites_empty">Aucun favori. Ouvrez Dossiers, puis Applis sur la ligne Favoris.</string>
     <string name="btn_folders">Dossiers</string>
     <string name="folders_title">Dossiers</string>
     <string name="btn_new_folder">Nouveau dossier</string>

@@ -26,7 +26,7 @@
         android:paddingTop="28dp"
         android:paddingBottom="16dp">
 
-        <!-- Top bar: name and logo on the left, clock, date, weather and buttons on the right. -->
+        <!-- Top bar: name and logo, clock, date and weather, then buttons. -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -98,14 +98,27 @@
                 android:text="@string/settings_button" />
         </LinearLayout>
 
-        <!-- Folder tiles. -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/folder_list"
+        <!-- Empty space pushes the favorites to the bottom. -->
+        <View
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="32dp"
-            android:layout_weight="1"
-            android:clipToPadding="false"
-            android:paddingBottom="24dp" />
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/fav_empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:text="@string/favorites_empty"
+            android:textColor="#FFDCEEFF"
+            android:textSize="16sp"
+            android:visibility="gone" />
+
+        <!-- Favorites: bottom row first, more rows added above. -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/fav_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false" />
     </LinearLayout>
 </FrameLayout>

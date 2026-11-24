@@ -7,10 +7,14 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-/** One row per folder on the manage screen: name, then rename / apps / delete buttons. */
+/**
+ * One row per folder on the manage screen.
+ * Name opens the folder. Rename and delete only for user folders. Apps button for all but "All apps".
+ */
 class FolderRowAdapter(
     private val folders: List<Folder>,
     private val nameOf: (Folder) -> String,
+    private val onOpen: (Folder) -> Unit,
     private val onRename: (Folder) -> Unit,
     private val onPick: (Folder) -> Unit,
     private val onDelete: (Folder) -> Unit
@@ -30,13 +34,14 @@ class FolderRowAdapter(
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
         val folder = folders[position]
-        val editable = folder.id != Folders.ALL_ID
-        val visibility = if (editable) View.VISIBLE else View.GONE
+        val isAll = folder.id == Folders.ALL_ID
+        val userFolder = !Folders.isBuiltIn(folder)
 
         holder.name.text = nameOf(folder)
-        holder.rename.visibility = visibility
-        holder.pick.visibility = visibility
-        holder.delete.visibility = visibility
+        holder.name.setOnClickListener { onOpen(folder) }
+        holder.rename.visibility = if (userFolder) View.VISIBLE else View.GONE
+        holder.delete.visibility = if (userFolder) View.VISIBLE else View.GONE
+        holder.pick.visibility = if (isAll) View.GONE else View.VISIBLE
 
         holder.rename.setOnClickListener { onRename(folder) }
         holder.pick.setOnClickListener { onPick(folder) }

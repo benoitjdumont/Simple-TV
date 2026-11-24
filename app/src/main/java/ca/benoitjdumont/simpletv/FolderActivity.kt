@@ -7,7 +7,7 @@ import androidx.activity.ComponentActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-/** Shows the apps of one folder as text tiles. */
+/** Shows the apps of one folder, with their logos. */
 class FolderActivity : ComponentActivity() {
 
     companion object {
@@ -40,6 +40,6 @@ class FolderActivity : ComponentActivity() {
         val shown = if (folder.id == Folders.ALL_ID) all else all.filter { it.key in folder.apps }
 
         empty.visibility = if (shown.isEmpty()) View.VISIBLE else View.GONE
-        list.adapter = AppAdapter(shown, Prefs.showIcons(this))
+        list.adapter = AppAdapter(shown)
     }
 }

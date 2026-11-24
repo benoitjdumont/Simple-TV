@@ -11,9 +11,6 @@
     <string name="btn_pick_image">Elegir una imagen</string>
     <string name="btn_pick_folder">Elegir la carpeta de la presentación</string>
     <string name="settings_interval">Intervalo de la presentación: %1$d s</string>
-    <string name="settings_icons">Iconos: %1$s</string>
-    <string name="icons_on">Activados</string>
-    <string name="icons_off">Desactivados</string>
     <string name="label_latitude">Latitud</string>
     <string name="label_longitude">Longitud</string>
     <string name="btn_save">Guardar</string>
@@ -23,6 +20,8 @@
     <string name="need_image">Elige una imagen antes de guardar.</string>
     <string name="need_folder">Elige una carpeta antes de guardar.</string>
     <string name="folder_all">Todas las aplicaciones</string>
+    <string name="folder_favorites">Favoritos</string>
+    <string name="favorites_empty">Aún no hay favoritos. Abre Carpetas y luego Apps en la fila Favoritos.</string>
     <string name="btn_folders">Carpetas</string>
     <string name="folders_title">Carpetas</string>
     <string name="btn_new_folder">Nueva carpeta</string>
