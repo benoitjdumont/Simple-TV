@@ -12,6 +12,9 @@
     <string name="btn_pick_image">Choose an image</string>
     <string name="btn_pick_folder">Choose a slideshow folder</string>
     <string name="settings_interval">Slideshow delay: %1$d s</string>
+    <string name="settings_icons">Icons: %1$s</string>
+    <string name="icons_on">On</string>
+    <string name="icons_off">Off</string>
     <string name="label_latitude">Latitude</string>
     <string name="label_longitude">Longitude</string>
     <string name="btn_save">Save</string>
@@ -20,4 +23,16 @@
     <string name="bad_coords">Invalid latitude or longitude.</string>
     <string name="need_image">Choose an image before saving.</string>
     <string name="need_folder">Choose a folder before saving.</string>
+    <string name="folder_all">All apps</string>
+    <string name="btn_folders">Folders</string>
+    <string name="folders_title">Folders</string>
+    <string name="btn_new_folder">New folder</string>
+    <string name="folder_name_hint">Folder name</string>
+    <string name="btn_rename">Rename</string>
+    <string name="btn_delete">Delete</string>
+    <string name="btn_pick_apps">Apps</string>
+    <string name="btn_ok">OK</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="confirm_delete">Delete folder \"%1$s\"? The apps stay installed.</string>
+    <string name="folder_empty">No apps in this folder.</string>
 </resources>

@@ -11,6 +11,9 @@
     <string name="btn_pick_image">Elegir una imagen</string>
     <string name="btn_pick_folder">Elegir la carpeta de la presentación</string>
     <string name="settings_interval">Intervalo de la presentación: %1$d s</string>
+    <string name="settings_icons">Iconos: %1$s</string>
+    <string name="icons_on">Activados</string>
+    <string name="icons_off">Desactivados</string>
     <string name="label_latitude">Latitud</string>
     <string name="label_longitude">Longitud</string>
     <string name="btn_save">Guardar</string>
@@ -19,4 +22,16 @@
     <string name="bad_coords">Latitud o longitud no válida.</string>
     <string name="need_image">Elige una imagen antes de guardar.</string>
     <string name="need_folder">Elige una carpeta antes de guardar.</string>
+    <string name="folder_all">Todas las aplicaciones</string>
+    <string name="btn_folders">Carpetas</string>
+    <string name="folders_title">Carpetas</string>
+    <string name="btn_new_folder">Nueva carpeta</string>
+    <string name="folder_name_hint">Nombre de la carpeta</string>
+    <string name="btn_rename">Renombrar</string>
+    <string name="btn_delete">Eliminar</string>
+    <string name="btn_pick_apps">Apps</string>
+    <string name="btn_ok">OK</string>
+    <string name="btn_cancel">Cancelar</string>
+    <string name="confirm_delete">¿Eliminar la carpeta «%1$s»? Las aplicaciones siguen instaladas.</string>
+    <string name="folder_empty">No hay aplicaciones en esta carpeta.</string>
 </resources>

@@ -4,11 +4,10 @@
     <!-- Weather only. Nothing else leaves the device. -->
     <uses-permission android:name="android.permission.INTERNET" />
 
-    <!-- Android TV: available as a TV app, touch screen not required. -->
     <uses-feature android:name="android.software.leanback" android:required="false" />
     <uses-feature android:name="android.hardware.touchscreen" android:required="false" />
 
-    <!-- Needed on Android 11+ to list the apps shown on the home screen. -->
+    <!-- Needed on Android 11+ to list the apps shown in folders. -->
     <queries>
         <intent>
             <action android:name="android.intent.action.MAIN" />
@@ -35,15 +34,14 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.HOME" />
                 <category android:name="android.intent.category.DEFAULT" />
-                <!-- Lets Android list Simple TV in the apps menu and enables "Ouvrir". -->
                 <category android:name="android.intent.category.LAUNCHER" />
                 <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".SettingsActivity"
-            android:exported="false"
-            android:theme="@android:style/Theme.DeviceDefault.NoActionBar" />
+        <activity android:name=".FolderActivity" android:exported="false" />
+        <activity android:name=".FoldersActivity" android:exported="false" />
+        <activity android:name=".AppPickerActivity" android:exported="false" />
+        <activity android:name=".SettingsActivity" android:exported="false" />
     </application>
 </manifest>

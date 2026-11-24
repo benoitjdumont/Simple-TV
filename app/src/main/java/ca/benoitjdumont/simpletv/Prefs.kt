@@ -15,6 +15,7 @@ object Prefs {
     const val KEY_INTERVAL = "interval_s"
     const val KEY_LAT = "lat"
     const val KEY_LON = "lon"
+    const val KEY_ICONS = "show_icons"
 
     private const val FILE = "simple_tv"
     private const val DEFAULT_LAT = "45.5017"   // Montréal, change it in Settings
@@ -30,4 +31,6 @@ object Prefs {
             p.getString(KEY_LON, DEFAULT_LON) ?: DEFAULT_LON
         )
     }
+
+    fun showIcons(context: Context): Boolean = get(context).getBoolean(KEY_ICONS, false)
 }

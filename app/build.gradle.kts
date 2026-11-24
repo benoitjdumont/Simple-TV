@@ -11,8 +11,19 @@ android {
         applicationId = "ca.benoitjdumont.simpletv"
         minSdk = 26
         targetSdk = 34
-        versionCode = 2
-        versionName = "2.0.0"
+        versionCode = 3
+        versionName = "2.1.0"
+    }
+
+    // Same test key for every build, so new APKs install over old ones without uninstalling.
+    // This is a test key, not a release key: it is safe to commit.
+    signingConfigs {
+        getByName("debug") {
+            storeFile = file("debug.keystore")
+            storePassword = "android"
+            keyAlias = "androiddebugkey"
+            keyPassword = "android"
+        }
     }
 
     buildTypes {
@@ -32,7 +43,6 @@ android {
 }
 
 dependencies {
-    // Activity Result API (file pickers), DocumentFile (folder slideshow), RecyclerView (app grid).
     implementation("androidx.activity:activity-ktx:1.9.0")
     implementation("androidx.documentfile:documentfile:1.0.1")
     implementation("androidx.recyclerview:recyclerview:1.3.2")
