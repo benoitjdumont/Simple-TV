@@ -33,4 +33,7 @@
     <string name="btn_cancel">Annuler</string>
     <string name="confirm_delete">Supprimer le dossier « %1$s » ? Les applications restent installées.</string>
     <string name="folder_empty">Aucune application dans ce dossier.</string>
+    <string name="btn_default_home">Définir comme lanceur par défaut</string>
+    <string name="home_yes">Simple TV est le lanceur par défaut.</string>
+    <string name="home_no">Simple TV n\'est pas encore le lanceur par défaut.</string>
 </resources>

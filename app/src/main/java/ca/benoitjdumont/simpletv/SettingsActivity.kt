@@ -1,7 +1,12 @@
 package ca.benoitjdumont.simpletv
 
+import android.app.role.RoleManager
+import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -20,6 +25,13 @@ class SettingsActivity : ComponentActivity() {
     private lateinit var status: TextView
     private lateinit var lat: EditText
     private lateinit var lon: EditText
+    private lateinit var btnHome: Button
+    private lateinit var homeStatus: TextView
+
+    // Returns from the system "default home app" dialog; refresh the status line.
+    private val requestHome = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        updateHomeStatus()
+    }
 
     // Picking an image or folder also selects the matching background mode.
     private val pickImage = registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
@@ -57,6 +69,9 @@ class SettingsActivity : ComponentActivity() {
         status = findViewById(R.id.text_status)
         lat = findViewById(R.id.edit_lat)
         lon = findViewById(R.id.edit_lon)
+        btnHome = findViewById(R.id.btn_default_home)
+        homeStatus = findViewById(R.id.home_status)
+        btnHome.setOnClickListener { askDefaultHome() }
 
         val (la, lo) = Prefs.coords(this)
         lat.setText(la)
@@ -87,6 +102,39 @@ class SettingsActivity : ComponentActivity() {
         findViewById<Button>(R.id.btn_save).setOnClickListener { save() }
 
         updateLabels()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        updateHomeStatus()
+    }
+
+    /** True when Simple TV is the app Android opens with the Home button. */
+    private fun isDefaultHome(): Boolean {
+        val intent = Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_HOME)
+        val match = packageManager.resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY)
+        return match?.activityInfo?.packageName == packageName
+    }
+
+    private fun updateHomeStatus() {
+        homeStatus.text = getString(if (isDefaultHome()) R.string.home_yes else R.string.home_no)
+    }
+
+    /** Opens the system dialog that asks which home app to use. Nothing is forced. */
+    private fun askDefaultHome() {
+        if (Build.VERSION.SDK_INT >= 29) {
+            val rm = getSystemService(RoleManager::class.java)
+            if (rm != null && rm.isRoleAvailable(RoleManager.ROLE_HOME)) {
+                requestHome.launch(rm.createRequestRoleIntent(RoleManager.ROLE_HOME))
+                return
+            }
+        }
+        // Older Android, or no role dialog: open the default-apps page instead.
+        try {
+            startActivity(Intent(Settings.ACTION_HOME_SETTINGS))
+        } catch (e: ActivityNotFoundException) {
+            startActivity(Intent(Settings.ACTION_SETTINGS))
+        }
     }
 
     private fun updateLabels() {

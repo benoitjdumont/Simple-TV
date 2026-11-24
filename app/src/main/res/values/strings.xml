@@ -34,4 +34,7 @@
     <string name="btn_cancel">Cancel</string>
     <string name="confirm_delete">Delete folder \"%1$s\"? The apps stay installed.</string>
     <string name="folder_empty">No apps in this folder.</string>
+    <string name="btn_default_home">Set as default launcher</string>
+    <string name="home_yes">Simple TV is the default launcher.</string>
+    <string name="home_no">Simple TV is not the default launcher yet.</string>
 </resources>

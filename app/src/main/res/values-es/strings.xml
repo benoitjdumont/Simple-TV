@@ -33,4 +33,7 @@
     <string name="btn_cancel">Cancelar</string>
     <string name="confirm_delete">¿Eliminar la carpeta «%1$s»? Las aplicaciones siguen instaladas.</string>
     <string name="folder_empty">No hay aplicaciones en esta carpeta.</string>
+    <string name="btn_default_home">Establecer como lanzador predeterminado</string>
+    <string name="home_yes">Simple TV es el lanzador predeterminado.</string>
+    <string name="home_no">Simple TV aún no es el lanzador predeterminado.</string>
 </resources>
