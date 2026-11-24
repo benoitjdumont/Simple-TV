@@ -1,3 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Default language (English), used when the box language has no translation. -->
 <resources>
     <string name="app_name">Simple TV</string>
+    <string name="weather_unavailable">Weather unavailable</string>
+    <string name="settings_button">Settings</string>
+    <string name="settings_title">Simple TV settings</string>
+    <string name="settings_mode">Background: %1$s</string>
+    <string name="mode_none">None</string>
+    <string name="mode_image">One image</string>
+    <string name="mode_slideshow">Slideshow from a folder</string>
+    <string name="btn_pick_image">Choose an image</string>
+    <string name="btn_pick_folder">Choose a slideshow folder</string>
+    <string name="settings_interval">Slideshow delay: %1$d s</string>
+    <string name="label_latitude">Latitude</string>
+    <string name="label_longitude">Longitude</string>
+    <string name="btn_save">Save</string>
+    <string name="image_selected">Image selected. Save to apply.</string>
+    <string name="folder_selected">Folder selected. Save to apply.</string>
+    <string name="bad_coords">Invalid latitude or longitude.</string>
+    <string name="need_image">Choose an image before saving.</string>
+    <string name="need_folder">Choose a folder before saving.</string>
 </resources>

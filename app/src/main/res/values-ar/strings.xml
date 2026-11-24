@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Simple TV</string>
+    <string name="weather_unavailable">الطقس غير متاح</string>
+    <string name="settings_button">الإعدادات</string>
+    <string name="settings_title">إعدادات Simple TV</string>
+    <string name="settings_mode">الخلفية: %1$s</string>
+    <string name="mode_none">بدون</string>
+    <string name="mode_image">صورة واحدة</string>
+    <string name="mode_slideshow">عرض شرائح من مجلد</string>
+    <string name="btn_pick_image">اختيار صورة</string>
+    <string name="btn_pick_folder">اختيار مجلد عرض الشرائح</string>
+    <string name="settings_interval">مدة عرض الشرائح: %1$d ثانية</string>
+    <string name="label_latitude">خط العرض</string>
+    <string name="label_longitude">خط الطول</string>
+    <string name="btn_save">حفظ</string>
+    <string name="image_selected">تم اختيار الصورة. احفظ لتطبيق التغيير.</string>
+    <string name="folder_selected">تم اختيار المجلد. احفظ لتطبيق التغيير.</string>
+    <string name="bad_coords">خط العرض أو خط الطول غير صالح.</string>
+    <string name="need_image">اختر صورة قبل الحفظ.</string>
+    <string name="need_folder">اختر مجلدًا قبل الحفظ.</string>
+</resources>

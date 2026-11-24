@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Simple TV</string>
+    <string name="weather_unavailable">Wetter nicht verfügbar</string>
+    <string name="settings_button">Einstellungen</string>
+    <string name="settings_title">Einstellungen von Simple TV</string>
+    <string name="settings_mode">Hintergrund: %1$s</string>
+    <string name="mode_none">Keiner</string>
+    <string name="mode_image">Ein Bild</string>
+    <string name="mode_slideshow">Diashow aus einem Ordner</string>
+    <string name="btn_pick_image">Bild auswählen</string>
+    <string name="btn_pick_folder">Diashow-Ordner auswählen</string>
+    <string name="settings_interval">Diashow-Intervall: %1$d s</string>
+    <string name="label_latitude">Breitengrad</string>
+    <string name="label_longitude">Längengrad</string>
+    <string name="btn_save">Speichern</string>
+    <string name="image_selected">Bild ausgewählt. Zum Übernehmen speichern.</string>
+    <string name="folder_selected">Ordner ausgewählt. Zum Übernehmen speichern.</string>
+    <string name="bad_coords">Ungültiger Breiten- oder Längengrad.</string>
+    <string name="need_image">Wähle vor dem Speichern ein Bild aus.</string>
+    <string name="need_folder">Wähle vor dem Speichern einen Ordner aus.</string>
+</resources>

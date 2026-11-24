@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Simple TV</string>
+    <string name="weather_unavailable">Clima no disponible</string>
+    <string name="settings_button">Ajustes</string>
+    <string name="settings_title">Ajustes de Simple TV</string>
+    <string name="settings_mode">Fondo: %1$s</string>
+    <string name="mode_none">Ninguno</string>
+    <string name="mode_image">Una imagen</string>
+    <string name="mode_slideshow">Presentación de una carpeta</string>
+    <string name="btn_pick_image">Elegir una imagen</string>
+    <string name="btn_pick_folder">Elegir la carpeta de la presentación</string>
+    <string name="settings_interval">Intervalo de la presentación: %1$d s</string>
+    <string name="label_latitude">Latitud</string>
+    <string name="label_longitude">Longitud</string>
+    <string name="btn_save">Guardar</string>
+    <string name="image_selected">Imagen elegida. Guarda para aplicar.</string>
+    <string name="folder_selected">Carpeta elegida. Guarda para aplicar.</string>
+    <string name="bad_coords">Latitud o longitud no válida.</string>
+    <string name="need_image">Elige una imagen antes de guardar.</string>
+    <string name="need_folder">Elige una carpeta antes de guardar.</string>
+</resources>

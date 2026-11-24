@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Simple TV</string>
+    <string name="weather_unavailable">Погода недоступна</string>
+    <string name="settings_button">Настройки</string>
+    <string name="settings_title">Настройки Simple TV</string>
+    <string name="settings_mode">Фон: %1$s</string>
+    <string name="mode_none">Нет</string>
+    <string name="mode_image">Одно изображение</string>
+    <string name="mode_slideshow">Слайд-шоу из папки</string>
+    <string name="btn_pick_image">Выбрать изображение</string>
+    <string name="btn_pick_folder">Выбрать папку для слайд-шоу</string>
+    <string name="settings_interval">Интервал слайд-шоу: %1$d с</string>
+    <string name="label_latitude">Широта</string>
+    <string name="label_longitude">Долгота</string>
+    <string name="btn_save">Сохранить</string>
+    <string name="image_selected">Изображение выбрано. Сохраните, чтобы применить.</string>
+    <string name="folder_selected">Папка выбрана. Сохраните, чтобы применить.</string>
+    <string name="bad_coords">Неверная широта или долгота.</string>
+    <string name="need_image">Сначала выберите изображение.</string>
+    <string name="need_folder">Сначала выберите папку.</string>
+</resources>

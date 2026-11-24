@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Simple TV</string>
+    <string name="weather_unavailable">天气不可用</string>
+    <string name="settings_button">设置</string>
+    <string name="settings_title">Simple TV 设置</string>
+    <string name="settings_mode">背景：%1$s</string>
+    <string name="mode_none">无</string>
+    <string name="mode_image">一张图片</string>
+    <string name="mode_slideshow">文件夹幻灯片</string>
+    <string name="btn_pick_image">选择图片</string>
+    <string name="btn_pick_folder">选择幻灯片文件夹</string>
+    <string name="settings_interval">幻灯片间隔：%1$d 秒</string>
+    <string name="label_latitude">纬度</string>
+    <string name="label_longitude">经度</string>
+    <string name="btn_save">保存</string>
+    <string name="image_selected">已选择图片。保存后生效。</string>
+    <string name="folder_selected">已选择文件夹。保存后生效。</string>
+    <string name="bad_coords">纬度或经度无效。</string>
+    <string name="need_image">保存前请先选择图片。</string>
+    <string name="need_folder">保存前请先选择文件夹。</string>
+</resources>

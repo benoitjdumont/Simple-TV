@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Simple TV</string>
+    <string name="weather_unavailable">Weer niet beschikbaar</string>
+    <string name="settings_button">Instellingen</string>
+    <string name="settings_title">Instellingen van Simple TV</string>
+    <string name="settings_mode">Achtergrond: %1$s</string>
+    <string name="mode_none">Geen</string>
+    <string name="mode_image">Eén afbeelding</string>
+    <string name="mode_slideshow">Diavoorstelling uit een map</string>
+    <string name="btn_pick_image">Afbeelding kiezen</string>
+    <string name="btn_pick_folder">Map voor de diavoorstelling kiezen</string>
+    <string name="settings_interval">Interval diavoorstelling: %1$d s</string>
+    <string name="label_latitude">Breedtegraad</string>
+    <string name="label_longitude">Lengtegraad</string>
+    <string name="btn_save">Opslaan</string>
+    <string name="image_selected">Afbeelding gekozen. Opslaan om toe te passen.</string>
+    <string name="folder_selected">Map gekozen. Opslaan om toe te passen.</string>
+    <string name="bad_coords">Ongeldige breedte- of lengtegraad.</string>
+    <string name="need_image">Kies eerst een afbeelding.</string>
+    <string name="need_folder">Kies eerst een map.</string>
+</resources>

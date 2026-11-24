@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Simple TV</string>
+    <string name="weather_unavailable">天気を取得できません</string>
+    <string name="settings_button">設定</string>
+    <string name="settings_title">Simple TV の設定</string>
+    <string name="settings_mode">背景: %1$s</string>
+    <string name="mode_none">なし</string>
+    <string name="mode_image">1枚の画像</string>
+    <string name="mode_slideshow">フォルダのスライドショー</string>
+    <string name="btn_pick_image">画像を選択</string>
+    <string name="btn_pick_folder">スライドショーのフォルダを選択</string>
+    <string name="settings_interval">スライドショーの間隔: %1$d 秒</string>
+    <string name="label_latitude">緯度</string>
+    <string name="label_longitude">経度</string>
+    <string name="btn_save">保存</string>
+    <string name="image_selected">画像を選択しました。保存すると反映されます。</string>
+    <string name="folder_selected">フォルダを選択しました。保存すると反映されます。</string>
+    <string name="bad_coords">緯度または経度が無効です。</string>
+    <string name="need_image">保存する前に画像を選択してください。</string>
+    <string name="need_folder">保存する前にフォルダを選択してください。</string>
+</resources>
