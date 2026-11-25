@@ -41,6 +41,8 @@
     <string name="section_home">Home screen</string>
     <string name="section_weather">Weather location</string>
     <string name="settings_menu_title">Settings</string>
+    <string name="copying">Copying photos…</string>
+    <string name="copy_failed">Could not copy the photos. Try again.</string>
     <string name="row_folders_sub">Create folders and choose their apps</string>
     <string name="weather_coords">Latitude %1$s, longitude %2$s</string>
 </resources>

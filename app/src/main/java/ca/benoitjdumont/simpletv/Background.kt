@@ -6,9 +6,13 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Handler
 import android.widget.ImageView
-import androidx.documentfile.provider.DocumentFile
+import java.io.File
 
-/** Shows nothing, one image, or a slideshow of a folder behind the home screen. */
+/**
+ * Shows nothing, one image, or a slideshow behind the home screen.
+ * Images are copied into the app's own storage when chosen (see BackgroundSettingsActivity),
+ * so they stay available after a reboot without any system permission.
+ */
 class Background(
     private val context: Context,
     private val view: ImageView,
@@ -56,16 +60,11 @@ class Background(
     private fun intervalMs(): Long =
         Prefs.get(context).getInt(Prefs.KEY_INTERVAL, 60) * 1000L
 
+    /** The slideshow folder is a plain directory path in the app's storage. */
     private fun listImages(folder: String?): List<Uri> {
         if (folder == null) return emptyList()
-        return try {
-            val dir = DocumentFile.fromTreeUri(context, Uri.parse(folder)) ?: return emptyList()
-            dir.listFiles()
-                .filter { it.isFile && it.type?.startsWith("image/") == true }
-                .map { it.uri }
-        } catch (e: Exception) {
-            emptyList()
-        }
+        val files = File(folder).listFiles() ?: return emptyList()
+        return files.filter { it.isFile }.sortedBy { it.name }.map { Uri.fromFile(it) }
     }
 
     private fun show(uri: Uri) {

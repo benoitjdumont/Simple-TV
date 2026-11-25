@@ -1,14 +1,24 @@
 package ca.benoitjdumont.simpletv
 
-import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.documentfile.provider.DocumentFile
+import java.io.File
+import kotlin.concurrent.thread
 
-/** Background page: none, one image, or a slideshow from a folder. */
+/**
+ * Background page: none, one image, or a slideshow from a folder.
+ * The chosen photos are copied into the app's own storage, so they survive reboots.
+ */
 class BackgroundSettingsActivity : ComponentActivity() {
+
+    companion object {
+        private const val MAX_SLIDES = 50
+    }
 
     private var mode = Prefs.MODE_NONE
     private var imageUri: String? = null
@@ -22,21 +32,57 @@ class BackgroundSettingsActivity : ComponentActivity() {
     // Picking an image or folder also selects the matching background mode.
     private val pickImage = registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
         if (uri != null) {
-            runCatching { contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION) }
-            imageUri = uri.toString()
-            mode = Prefs.MODE_IMAGE
-            status.text = getString(R.string.image_selected)
-            updateLabels()
+            status.text = getString(R.string.copying)
+            thread {
+                val dest = File(filesDir, "background.img")
+                val ok = try {
+                    copyTo(uri, dest)
+                    true
+                } catch (e: Exception) {
+                    false
+                }
+                runOnUiThread {
+                    if (ok) {
+                        imageUri = Uri.fromFile(dest).toString()
+                        mode = Prefs.MODE_IMAGE
+                        status.text = getString(R.string.image_selected)
+                        updateLabels()
+                    } else {
+                        status.text = getString(R.string.copy_failed)
+                    }
+                }
+            }
         }
     }
 
     private val pickFolder = registerForActivityResult(ActivityResultContracts.OpenDocumentTree()) { uri ->
         if (uri != null) {
-            runCatching { contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION) }
-            folderUri = uri.toString()
-            mode = Prefs.MODE_SLIDESHOW
-            status.text = getString(R.string.folder_selected)
-            updateLabels()
+            status.text = getString(R.string.copying)
+            thread {
+                val dir = File(filesDir, "slides")
+                dir.deleteRecursively()
+                dir.mkdirs()
+                val count = try {
+                    val photos = DocumentFile.fromTreeUri(this, uri)?.listFiles()
+                        ?.filter { it.isFile && it.type?.startsWith("image/") == true }
+                        ?.take(MAX_SLIDES)
+                        ?: emptyList()
+                    photos.forEachIndexed { i, photo -> copyTo(photo.uri, File(dir, "slide_$i")) }
+                    photos.size
+                } catch (e: Exception) {
+                    0
+                }
+                runOnUiThread {
+                    if (count > 0) {
+                        folderUri = dir.absolutePath
+                        mode = Prefs.MODE_SLIDESHOW
+                        status.text = getString(R.string.folder_selected)
+                        updateLabels()
+                    } else {
+                        status.text = getString(R.string.copy_failed)
+                    }
+                }
+            }
         }
     }
 
@@ -79,6 +125,12 @@ class BackgroundSettingsActivity : ComponentActivity() {
         findViewById<Button>(R.id.btn_save).setOnClickListener { save() }
 
         updateLabels()
+    }
+
+    private fun copyTo(src: Uri, dest: File) {
+        contentResolver.openInputStream(src)?.use { input ->
+            dest.outputStream().use { input.copyTo(it) }
+        } ?: throw IllegalStateException("cannot open $src")
     }
 
     private fun updateLabels() {
