@@ -36,4 +36,7 @@
     <string name="btn_default_home">Establecer como lanzador predeterminado</string>
     <string name="home_yes">Simple TV es el lanzador predeterminado.</string>
     <string name="home_no">Simple TV aún no es el lanzador predeterminado.</string>
+    <string name="section_background">Fondo</string>
+    <string name="section_home">Pantalla de inicio</string>
+    <string name="section_weather">Ubicación del clima</string>
 </resources>

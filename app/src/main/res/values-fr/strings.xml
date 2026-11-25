@@ -36,4 +36,7 @@
     <string name="btn_default_home">Définir comme lanceur par défaut</string>
     <string name="home_yes">Simple TV est le lanceur par défaut.</string>
     <string name="home_no">Simple TV n\'est pas encore le lanceur par défaut.</string>
+    <string name="section_background">Fond d\'écran</string>
+    <string name="section_home">Écran d\'accueil</string>
+    <string name="section_weather">Emplacement météo</string>
 </resources>

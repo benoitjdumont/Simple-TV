@@ -37,4 +37,7 @@
     <string name="btn_default_home">Set as default launcher</string>
     <string name="home_yes">Simple TV is the default launcher.</string>
     <string name="home_no">Simple TV is not the default launcher yet.</string>
+    <string name="section_background">Background</string>
+    <string name="section_home">Home screen</string>
+    <string name="section_weather">Weather location</string>
 </resources>
