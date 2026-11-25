@@ -57,7 +57,8 @@ class MainActivity : ComponentActivity() {
         val usableWidth = resources.displayMetrics.widthPixels - (96 * density).toInt()
         val tileWidth = (168 * density).toInt()
         val layout = GridLayoutManager(this, max(1, usableWidth / tileWidth))
-        layout.stackFromEnd = true
+        // GridLayoutManager does not support stackFromEnd; reverseLayout puts the first row at the bottom.
+        layout.reverseLayout = true
         favList.layoutManager = layout
 
         findViewById<Button>(R.id.btn_folders).setOnClickListener {
