@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FF0F1B2A">
+
+    <LinearLayout
+        android:layout_width="960dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:paddingTop="40dp"
+        android:paddingBottom="48dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:text="@string/section_weather"
+            android:textColor="#FFFFFFFF"
+            android:textSize="32sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/edit_lat"
+            style="@style/SettingsField"
+            android:hint="@string/label_latitude"
+            android:inputType="numberSigned|numberDecimal" />
+
+        <EditText
+            android:id="@+id/edit_lon"
+            style="@style/SettingsField"
+            android:hint="@string/label_longitude"
+            android:inputType="numberSigned|numberDecimal" />
+
+        <Button
+            android:id="@+id/btn_save"
+            style="@style/SettingsRow"
+            android:layout_marginTop="24dp"
+            android:text="@string/btn_save" />
+
+        <TextView
+            android:id="@+id/text_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:textColor="#FFB0C4D8"
+            android:textSize="18sp" />
+    </LinearLayout>
+</ScrollView>

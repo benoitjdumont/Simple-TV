@@ -4,7 +4,6 @@
     android:layout_height="match_parent"
     android:background="#FF0F1B2A">
 
-    <!-- Centered column, so it reads well on a wide TV screen. -->
     <LinearLayout
         android:layout_width="960dp"
         android:layout_height="wrap_content"
@@ -18,83 +17,34 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:text="@string/settings_title"
+            android:layout_marginBottom="24dp"
+            android:text="@string/settings_menu_title"
             android:textColor="#FFFFFFFF"
             android:textSize="32sp"
             android:textStyle="bold" />
 
-        <!-- Background -->
-        <TextView
-            style="@style/SettingsSection"
-            android:text="@string/section_background" />
-
-        <Button
-            android:id="@+id/btn_mode"
-            style="@style/SettingsRow" />
-
-        <Button
-            android:id="@+id/btn_pick_image"
-            style="@style/SettingsRow"
-            android:text="@string/btn_pick_image" />
-
-        <Button
-            android:id="@+id/btn_pick_folder"
-            style="@style/SettingsRow"
-            android:text="@string/btn_pick_folder" />
-
-        <Button
-            android:id="@+id/btn_interval"
-            style="@style/SettingsRow" />
-
-        <!-- Home -->
-        <TextView
-            style="@style/SettingsSection"
-            android:text="@string/section_home" />
-
-        <TextView
-            android:id="@+id/home_status"
-            android:layout_width="wrap_content"
+        <include
+            android:id="@+id/row_folders"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginBottom="12dp"
-            android:textColor="#FFB0C4D8"
-            android:textSize="18sp" />
+            layout="@layout/item_setting_row" />
 
-        <Button
-            android:id="@+id/btn_default_home"
-            style="@style/SettingsRow"
-            android:text="@string/btn_default_home" />
-
-        <!-- Weather -->
-        <TextView
-            style="@style/SettingsSection"
-            android:text="@string/section_weather" />
-
-        <EditText
-            android:id="@+id/edit_lat"
-            style="@style/SettingsField"
-            android:hint="@string/label_latitude"
-            android:inputType="numberSigned|numberDecimal" />
-
-        <EditText
-            android:id="@+id/edit_lon"
-            style="@style/SettingsField"
-            android:hint="@string/label_longitude"
-            android:inputType="numberSigned|numberDecimal" />
-
-        <Button
-            android:id="@+id/btn_save"
-            style="@style/SettingsRow"
-            android:layout_marginTop="24dp"
-            android:text="@string/btn_save" />
-
-        <TextView
-            android:id="@+id/text_status"
-            android:layout_width="wrap_content"
+        <include
+            android:id="@+id/row_background"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:textColor="#FFB0C4D8"
-            android:textSize="18sp" />
+            layout="@layout/item_setting_row" />
+
+        <include
+            android:id="@+id/row_home"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/item_setting_row" />
+
+        <include
+            android:id="@+id/row_weather"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/item_setting_row" />
     </LinearLayout>
 </ScrollView>

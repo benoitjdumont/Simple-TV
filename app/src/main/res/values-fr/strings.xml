@@ -39,4 +39,7 @@
     <string name="section_background">Fond d\'écran</string>
     <string name="section_home">Écran d\'accueil</string>
     <string name="section_weather">Emplacement météo</string>
+    <string name="settings_menu_title">Réglages</string>
+    <string name="row_folders_sub">Créer les dossiers et choisir leurs applis</string>
+    <string name="weather_coords">Latitude %1$s, longitude %2$s</string>
 </resources>

@@ -4,8 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.view.View
-import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.ComponentActivity
@@ -16,6 +15,7 @@ import java.util.Date
 import java.util.Locale
 import kotlin.concurrent.thread
 import kotlin.math.max
+import kotlin.math.min
 
 class MainActivity : ComponentActivity() {
 
@@ -24,8 +24,7 @@ class MainActivity : ComponentActivity() {
     private lateinit var clock: TextView
     private lateinit var date: TextView
     private lateinit var weather: TextView
-    private lateinit var favList: RecyclerView
-    private lateinit var favEmpty: TextView
+    private lateinit var folderList: RecyclerView
 
     private val clockTick = object : Runnable {
         override fun run() {
@@ -49,33 +48,32 @@ class MainActivity : ComponentActivity() {
         clock = findViewById(R.id.clock)
         date = findViewById(R.id.date)
         weather = findViewById(R.id.weather)
-        favList = findViewById(R.id.fav_list)
-        favEmpty = findViewById(R.id.fav_empty)
+        folderList = findViewById(R.id.folder_list)
 
-        // Favorites start at the bottom and grow upward, one row per screenful of width.
+        // Up to 5 folder tiles per row. The first row sits at the bottom, extra rows go above.
         val density = resources.displayMetrics.density
         val usableWidth = resources.displayMetrics.widthPixels - (96 * density).toInt()
         val tileWidth = (168 * density).toInt()
-        val layout = GridLayoutManager(this, max(1, usableWidth / tileWidth))
+        val span = min(5, max(1, usableWidth / tileWidth))
+        val layout = GridLayoutManager(this, span)
         // GridLayoutManager does not support stackFromEnd; reverseLayout puts the first row at the bottom.
         layout.reverseLayout = true
-        favList.layoutManager = layout
+        folderList.layoutManager = layout
 
-        findViewById<Button>(R.id.btn_folders).setOnClickListener {
-            startActivity(Intent(this, FoldersActivity::class.java))
-        }
-        findViewById<Button>(R.id.btn_settings).setOnClickListener {
+        findViewById<ImageButton>(R.id.btn_settings).setOnClickListener {
             startActivity(Intent(this, SettingsActivity::class.java))
         }
     }
 
     override fun onResume() {
         super.onResume()
-        // Reload every time, so favorites and newly installed apps show up.
-        val favoriteKeys = Folders.load(this).first { it.id == Folders.FAVORITES_ID }.apps
-        val favorites = AppsLoader.load(this).filter { it.key in favoriteKeys }
-        favList.adapter = AppAdapter(favorites)
-        favEmpty.visibility = if (favorites.isEmpty()) View.VISIBLE else View.GONE
+        // Reload every time, so renamed folders and new apps show up.
+        folderList.adapter = FolderTileAdapter(Folders.load(this)) { folder ->
+            startActivity(
+                Intent(this, FolderActivity::class.java)
+                    .putExtra(FolderActivity.EXTRA_ID, folder.id)
+            )
+        }
 
         background.start()
         handler.post(clockTick)

@@ -39,4 +39,7 @@
     <string name="section_background">Fondo</string>
     <string name="section_home">Pantalla de inicio</string>
     <string name="section_weather">Ubicación del clima</string>
+    <string name="settings_menu_title">Ajustes</string>
+    <string name="row_folders_sub">Crear carpetas y elegir sus apps</string>
+    <string name="weather_coords">Latitud %1$s, longitud %2$s</string>
 </resources>
