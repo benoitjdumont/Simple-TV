@@ -107,12 +107,6 @@
                 android:clipChildren="false"
                 android:clipToPadding="false" />
 
-            <!-- Fade at the top edge, so partly visible rows look cut off softly. -->
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="140dp"
-                android:layout_gravity="top"
-                android:background="@drawable/fade_top" />
         </FrameLayout>
     </LinearLayout>
 </FrameLayout>
