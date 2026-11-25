@@ -41,6 +41,7 @@
     <string name="section_weather">Emplacement météo</string>
     <string name="settings_menu_title">Réglages</string>
     <string name="copying">Copie des photos…</string>
+    <string name="home_adb_hint">Si le lanceur de Google revient après un redémarrage, lance une fois ceci sur ton PC (ADB) : adb shell pm disable-user --user 0 com.google.android.apps.tv.launcherx</string>
     <string name="copy_failed">Impossible de copier les photos. Réessayez.</string>
     <string name="row_folders_sub">Créer les dossiers et choisir leurs applis</string>
     <string name="weather_coords">Latitude %1$s, longitude %2$s</string>

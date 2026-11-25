@@ -46,5 +46,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             layout="@layout/item_setting_row" />
+
+        <!-- Help for boxes where Google's launcher comes back after a reboot. -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:paddingStart="8dp"
+            android:text="@string/home_adb_hint"
+            android:textColor="#FFB0C4D8"
+            android:textSize="16sp" />
     </LinearLayout>
 </ScrollView>
