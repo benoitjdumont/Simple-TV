@@ -1,25 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- One entry of the settings menu: icon, title, and the current value under it. -->
+<!-- One settings entry: round icon badge, title, and the current value under it. -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="28dp"
-    android:background="@drawable/bg_row"
+    android:layout_marginBottom="14dp"
+    android:background="@drawable/bg_setting_focus"
     android:clickable="true"
     android:focusable="true"
     android:gravity="center_vertical"
-    android:minHeight="96dp"
+    android:minHeight="104dp"
     android:orientation="horizontal"
-    android:paddingStart="24dp"
-    android:paddingEnd="24dp"
-    android:paddingTop="16dp"
-    android:paddingBottom="16dp">
+    android:paddingStart="20dp"
+    android:paddingEnd="28dp"
+    android:paddingTop="14dp"
+    android:paddingBottom="14dp">
 
     <ImageView
         android:id="@+id/icon"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:background="@drawable/bg_icon_circle"
         android:contentDescription="@null"
+        android:padding="14dp"
         android:tint="#FFFFFFFF" />
 
     <LinearLayout
@@ -33,8 +35,8 @@
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#FFFFFFFF"
-            android:textSize="22sp"
+            android:textColor="@color/setting_title"
+            android:textSize="24sp"
             android:textStyle="bold" />
 
         <TextView
@@ -42,7 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:textColor="#FFB0C4D8"
-            android:textSize="16sp" />
+            android:textColor="@color/setting_subtitle"
+            android:textSize="17sp" />
     </LinearLayout>
 </LinearLayout>
