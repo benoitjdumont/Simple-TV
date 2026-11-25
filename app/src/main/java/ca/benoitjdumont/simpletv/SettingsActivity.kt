@@ -10,6 +10,7 @@ import android.provider.Settings
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.result.contract.ActivityResultContracts
 
@@ -71,6 +72,12 @@ class SettingsActivity : ComponentActivity() {
 
     /** True when Simple TV is the app Android opens with the Home button. */
     private fun isDefaultHome(): Boolean {
+        if (Build.VERSION.SDK_INT >= 29) {
+            val rm = getSystemService(RoleManager::class.java)
+            if (rm != null && rm.isRoleAvailable(RoleManager.ROLE_HOME)) {
+                return rm.isRoleHeld(RoleManager.ROLE_HOME)
+            }
+        }
         val intent = Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_HOME)
         val match = packageManager.resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY)
         return match?.activityInfo?.packageName == packageName
@@ -78,6 +85,11 @@ class SettingsActivity : ComponentActivity() {
 
     /** Opens the system dialog that asks which home app to use. Nothing is forced. */
     private fun askDefaultHome() {
+        // Already the home app: the system dialog would close at once, so say so instead.
+        if (isDefaultHome()) {
+            Toast.makeText(this, R.string.home_already, Toast.LENGTH_SHORT).show()
+            return
+        }
         if (Build.VERSION.SDK_INT >= 29) {
             val rm = getSystemService(RoleManager::class.java)
             if (rm != null && rm.isRoleAvailable(RoleManager.ROLE_HOME)) {
