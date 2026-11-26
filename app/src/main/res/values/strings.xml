@@ -2,6 +2,8 @@
 <!-- Default language (English), used when the box language has no translation. -->
 <resources>
     <string name="app_name">Simple TV</string>
+    <string name="home_guard_label">Simple TV home guard</string>
+    <string name="home_guard_description">Brings Simple TV back on screen if Google\'s launcher comes back after a reboot. Reads no screen content.</string>
     <string name="weather_unavailable">Weather unavailable</string>
     <string name="settings_button">Settings</string>
     <string name="settings_title">Simple TV settings</string>
